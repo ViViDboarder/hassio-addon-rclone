@@ -1,8 +1,8 @@
 ---
-name: Rclone
-version: '1.3'
-slug: rclone
-description: Clone snapshots to another devices
+name: Rclone Snapshot Sync
+version: '1.4'
+slug: 262059b_rclone
+description: Sync snapshots to another devices
 arch:
   - armhf
   - armv7
@@ -12,7 +12,6 @@ startup: application
 boot: auto
 ingress: true
 ingress_port: 5572
-#webui: http://[HOST]:[PORT:3000]
 ports:
   5572/tcp: null
 ports_description:
