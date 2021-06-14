@@ -1,0 +1,19 @@
+#! /usr/bin/with-contenv bashio
+
+bashio::log.info "Starting rclone web..."
+
+# TODO: Something with UN and PASS
+# Maybe switch to --rc-no-auth and use proxy
+username=$(bashio::config 'credentials.username')
+password=$(bashio::config 'credentials.password')
+
+# TODO: Add cert paths here if ssl is true
+
+exec rclone rcd \
+    --rc-web-gui \
+    --rc-serve \
+    --rc-addr :5572 \
+    --rc-user "$username" \
+    --rc-pass "$password" \
+    --rc-web-gui-update \
+    --rc-web-gui-no-open-browser

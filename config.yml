@@ -1,0 +1,44 @@
+---
+name: Rclone
+version: '1.3'
+slug: rclone
+description: Clone snapshots to another devices
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+startup: application
+boot: auto
+ingress: true
+ingress_port: 5572
+#webui: http://[HOST]:[PORT:3000]
+ports:
+  5572/tcp: null
+ports_description:
+  5572/tcp: Web configuration GUI (not required for ingress)
+map:
+  - backup:ro
+  - ssl:ro
+options:
+  cron: "0 * * * *"
+  destination: "<drive>:<path>"
+  sync_command: sync
+  credentials:
+    username: homeassistant
+    password: homeassistant
+  tls:
+    ssl: false
+    certfile: fullchain.pem
+    keyfile: privkey.pem
+schema:
+  cron: str
+  destination: str
+  sync_command: list(sync|copy|move)
+  credentials:
+    username: str
+    password: str
+  tls:
+    ssl: bool
+    certfile: str
+    keyfile: str
