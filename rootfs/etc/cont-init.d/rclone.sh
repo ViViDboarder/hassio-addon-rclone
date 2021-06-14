@@ -2,6 +2,12 @@
 
 bashio::log.info "Configuring rclone..."
 
+bashio::config.require.username 'credentials.username'
+bashio::config.require.password 'credentials.password'
+
+bashio::config.suggest.true 'tls.ssl'
+bashio::config.require.ssl 'tls' 'tls.certfile' 'tls.keyfile'
+
 sync_command=$(bashio::config 'sync_command')
 destination=$(bashio::config 'destination')
 

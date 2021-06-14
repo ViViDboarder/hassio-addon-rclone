@@ -2,12 +2,18 @@
 
 bashio::log.info "Starting rclone web..."
 
+# Configure tls
+if bashio::config.true 'tls.ssl'; then
+    ssl_flags=(\
+        "--rc-cert" "/ssl/$(bashio::config 'tls.certfile')" \
+        "--rc-key" "/ssl/$(bashio::config 'tls.keyfile')" \
+    )
+fi
+
 # TODO: Something with UN and PASS
 # Maybe switch to --rc-no-auth and use proxy
 username=$(bashio::config 'credentials.username')
 password=$(bashio::config 'credentials.password')
-
-# TODO: Add cert paths here if ssl is true
 
 exec rclone rcd \
     --rc-web-gui \
@@ -16,4 +22,5 @@ exec rclone rcd \
     --rc-user "$username" \
     --rc-pass "$password" \
     --rc-web-gui-update \
-    --rc-web-gui-no-open-browser
+    --rc-web-gui-no-open-browser \
+    "${ssl_flags[@]}"
