@@ -1,7 +1,7 @@
 ---
 name: Rclone Snapshot Sync
 version: '1.4'
-slug: 262059b_rclone
+slug: rclone
 description: Sync snapshots to another devices
 arch:
   - armhf
