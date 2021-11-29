@@ -27,6 +27,18 @@ The rclone destination in the form `<drive>:<path>`. See note above on how to se
 
 Rclone command to execute (`sync`, `copy`, or `move`)
 
+### Option: `prune.rules`
+
+Rules for pruning backups based on time gap configuration. This is done with a tool caled [timegaps](https://gehrcke.de/timegaps/) and is optional.
+
+### Option: `prune.cron`
+
+Cron schedule to run the prune job. Need help? https://crontab.guru/
+
+### Option: `prune.delete`
+
+Rather than logging, if set to true, this will delete backups based on the rules set in `prune.rules`.
+
 ### Option: `credentials.username`
 
 Username to view web UI

@@ -8,13 +8,13 @@ bashio::config.require.password 'credentials.password'
 bashio::config.suggest.true 'tls.ssl'
 bashio::config.require.ssl 'tls' 'tls.certfile' 'tls.keyfile'
 
-sync_command=$(bashio::config 'sync_command')
-destination=$(bashio::config 'destination')
+SYNC_COMMAND=$(bashio::config 'sync_command')
+DESTINATION=$(bashio::config 'destination')
 
-username=$(bashio::config 'credentials.username')
-password=$(bashio::config 'credentials.password')
+USERNAME=$(bashio::config 'credentials.username')
+PASSWORD=$(bashio::config 'credentials.password')
 
-command="rclone rc --user \"$username\" --pass \"$password\" sync/$sync_command srcFs=/backup dstFs=$destination _async=true"
+command="rclone rc --user \"$USERNAME\" --pass \"$PASSWORD\" sync/$SYNC_COMMAND srcFs=/backup dstFs=$DESTINATION _async=true"
 
-echo "$(bashio::config 'cron') $command" > /etc/crontabs/root
+echo "$(bashio::config 'cron') $command" >> /etc/crontabs/root
 crontab -l

@@ -23,6 +23,10 @@ options:
   cron: "0 * * * *"
   destination: "<drive>:<path>"
   sync_command: sync
+  prune:
+    rules: ""
+    cron: ""
+    delete: false
   credentials:
     username: homeassistant
     password: homeassistant
@@ -34,6 +38,10 @@ schema:
   cron: str
   destination: str
   sync_command: list(sync|copy|move)
+  prune:
+    rules: str
+    cron: str
+    delete: bool
   credentials:
     username: str
     password: str
