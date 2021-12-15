@@ -8,7 +8,7 @@ if bashio::config.true 'prune.delete'; then
     TIMEGAPS_DELETE="--delete"
 fi
 
-if [ -z "$TIMEGAPS_RULES" ] && [ -z "$TIMEGAPS_CRON" ]; then
+if [ -n "$TIMEGAPS_RULES" ] && [ -n "$TIMEGAPS_CRON" ]; then
     COMMAND="timegaps $TIMEGAPS_DELETE $TIMEGAPS_RULES /backups/*.tar"
 
     echo "$TIMEGAPS_CRON $COMMAND" >> /etc/crontabs/root
