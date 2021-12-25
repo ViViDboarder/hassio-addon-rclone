@@ -1,6 +1,6 @@
 ---
 name: Rclone Snapshot Sync
-version: '1.5'
+version: '1.5.1'
 slug: rclone
 description: Sync snapshots to another devices
 arch:
