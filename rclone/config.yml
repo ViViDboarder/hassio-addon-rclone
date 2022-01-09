@@ -1,6 +1,6 @@
 ---
 name: Rclone Snapshot Sync
-version: '1.5.1'
+version: '1.5.2'
 slug: rclone
 description: Sync snapshots to another devices
 arch:
@@ -17,7 +17,7 @@ ports:
 ports_description:
   5572/tcp: Web configuration GUI (not required for ingress)
 map:
-  - backup:ro
+  - backup:rw
   - ssl:ro
 options:
   cron: "0 * * * *"
