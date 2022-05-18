@@ -2,4 +2,4 @@
 
 bashio::log.info "Starting cron..."
 
-exec crond -f -l 8
+exec crond -f -d 8
