@@ -13,7 +13,7 @@ DESTINATION=$(bashio::config 'destination')
 
 USERNAME=$(bashio::config 'credentials.username')
 PASSWORD=$(bashio::config 'credentials.password')
-FILTER='{"IncludeRule": "*.tar"}'
+FILTER='{"IncludeRule": ["*.tar"]}'
 
 command="rclone rc --user \"$USERNAME\" --pass \"$PASSWORD\" sync/$SYNC_COMMAND srcFs=/backup dstFs=$DESTINATION _async=true _filter='$FILTER'"
 
