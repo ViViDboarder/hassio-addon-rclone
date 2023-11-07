@@ -11,7 +11,7 @@ COPY install_rclone.sh /
 RUN /install_rclone.sh "${VERSION}" "${BUILD_ARCH}"
 
 # Add timegaps for pruning backups
-RUN apk add --no-cache python3~=3.9 py3-pip~=20 && \
+RUN apk add --no-cache python3 py3-pip && \
        pip install --no-cache-dir timegaps==0.1.1 && \
        apk del py3-pip
 
