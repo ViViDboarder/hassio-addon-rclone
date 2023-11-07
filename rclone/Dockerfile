@@ -4,7 +4,7 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 ARG BUILD_ARCH=aarch64
-ARG VERSION=v1.55.1
+ARG VERSION=v1.64.2
 
 # Install rclone
 COPY install_rclone.sh /
