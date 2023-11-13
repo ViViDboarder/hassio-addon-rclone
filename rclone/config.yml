@@ -35,7 +35,7 @@ options:
     ssl: false
     certfile: fullchain.pem
     keyfile: privkey.pem
-  protected_only:: false
+  protected_only: false
 schema:
   cron: str
   destination: str
