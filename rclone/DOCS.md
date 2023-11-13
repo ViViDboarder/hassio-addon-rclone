@@ -58,3 +58,7 @@ TLS cert file to use when ssl is enabled
 ### Option: `tls.keyfile`
 
 TLS key file to use when ssl is enabled
+
+### Option: `protected_only`
+
+Only include protected backups. This avoids syncing an unencrypted backup to a destination.
