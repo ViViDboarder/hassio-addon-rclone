@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.6.1
+- Fix protected file filter
+
 ## 1.6.0
 
 - Bump rclone version to v1.64.2
