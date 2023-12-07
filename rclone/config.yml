@@ -28,9 +28,6 @@ options:
     rules: ""
     cron: ""
     delete: false
-  credentials:
-    username: null
-    password: null
   tls:
     ssl: false
     certfile: fullchain.pem
