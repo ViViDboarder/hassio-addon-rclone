@@ -45,8 +45,8 @@ schema:
     cron: str
     delete: bool
   credentials:
-    username: str
-    password: str
+    username: str?
+    password: str?
   tls:
     ssl: bool
     certfile: str
