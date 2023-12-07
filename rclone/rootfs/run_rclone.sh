@@ -5,9 +5,6 @@ bashio::log.info "Running rclone..."
 SYNC_COMMAND=$(bashio::config 'sync_command')
 DESTINATION=$(bashio::config 'destination')
 
-USERNAME=$(bashio::config 'credentials.username')
-PASSWORD=$(bashio::config 'credentials.password')
-
 set +x
 
 FILTER='{"IncludeRule": ["*.tar"]}'
@@ -17,4 +14,11 @@ fi
 
 bashio::log.info "Filter: $FILTER"
 
-rclone rc --user "$USERNAME" --pass "$PASSWORD" "sync/$SYNC_COMMAND" srcFs=/backup "dstFs=$DESTINATION" _async=true _filter="$FILTER"
+
+# Maybe add the username and password
+if bashio::config.has_value 'credentials.username' && bashio::config.has_value 'credentials.password'; then
+  rclone_flags+=("--rc-user" "$(bashio::config 'credentials.username')")
+  rclone_flags+=("--rc-pass" "$(bashio::config 'credentials.password')")
+fi
+
+rclone rc "${rclone_flags[@]}" "sync/$SYNC_COMMAND" srcFs=/backup "dstFs=$DESTINATION" _async=true _filter="$FILTER"

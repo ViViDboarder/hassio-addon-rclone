@@ -2,11 +2,19 @@
 
 bashio::log.info "Configuring rclone..."
 
-bashio::config.require.username 'credentials.username'
-bashio::config.require.password 'credentials.password'
+if bashio::config.true 'tls.ssl'; then
+  bashio::config.require.ssl 'tls' 'tls.certfile' 'tls.keyfile'
+else
+  bashio::log.warning
+  bashio::log.warning "It's recommended to set tsl settings if exposing to the network and not through the proxy."
+  bashio::log.warning
+fi
 
-bashio::config.suggest.true 'tls.ssl'
-bashio::config.require.ssl 'tls' 'tls.certfile' 'tls.keyfile'
+if ! bashio::config.has_value 'credentials.username' || ! bashio::config.has_value 'credentials.password'; then
+  bashio::log.warning
+  bashio::log.warning "It's recommended to set credentials.username and credentials.password settings if exposing to the network and not through the proxy."
+  bashio::log.warning
+fi
 
 echo "$(bashio::config 'cron') /run_rclone.sh" >> /etc/crontabs/root
 crontab -l

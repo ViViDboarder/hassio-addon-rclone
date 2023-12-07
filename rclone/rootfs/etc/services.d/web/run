@@ -4,23 +4,25 @@ bashio::log.info "Starting rclone web..."
 
 # Configure tls
 if bashio::config.true 'tls.ssl'; then
-    ssl_flags=(\
-        "--rc-cert" "/ssl/$(bashio::config 'tls.certfile')" \
-        "--rc-key" "/ssl/$(bashio::config 'tls.keyfile')" \
-    )
+  bashio::config.require.ssl 'tls' 'tls.certfile' 'tls.keyfile'
+  rclone_flags=(\
+    "--rc-cert" "/ssl/$(bashio::config 'tls.certfile')" \
+    "--rc-key" "/ssl/$(bashio::config 'tls.keyfile')" \
+  )
 fi
 
-# TODO: Something with UN and PASS
-# Maybe switch to --rc-no-auth and use proxy
-username=$(bashio::config 'credentials.username')
-password=$(bashio::config 'credentials.password')
+# Optionally set a user and pass
+if bashio::config.has_value 'credentials.username' && bashio::config.has_value 'credentials.password'; then
+  rclone_flags+=("--rc-user" "$(bashio::config 'credentials.username')")
+  rclone_flags+=("--rc-pass" "$(bashio::config 'credentials.password')")
+else
+  rclone_flags+=("--rc-no-auth")
+fi
 
 exec rclone rcd \
     --rc-web-gui \
     --rc-serve \
     --rc-addr :5572 \
-    --rc-user "$username" \
-    --rc-pass "$password" \
     --rc-web-gui-update \
     --rc-web-gui-no-open-browser \
-    "${ssl_flags[@]}"
+    "${rclone_flags[@]}"

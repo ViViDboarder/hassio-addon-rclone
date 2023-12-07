@@ -29,8 +29,8 @@ options:
     cron: ""
     delete: false
   credentials:
-    username: homeassistant
-    password: homeassistant
+    username: null
+    password: null
   tls:
     ssl: false
     certfile: fullchain.pem
