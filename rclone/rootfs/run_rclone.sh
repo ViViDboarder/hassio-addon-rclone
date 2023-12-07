@@ -1,15 +1,16 @@
 #! /usr/bin/with-contenv bashio
 
+set +x
+set -eo pipefail
+
 bashio::log.info "Running rclone..."
 
 SYNC_COMMAND=$(bashio::config 'sync_command')
 DESTINATION=$(bashio::config 'destination')
 
-set +x
-
 FILTER='{"IncludeRule": ["*.tar"]}'
 if bashio::config.true 'protected_only'; then
-    FILTER="{\"IncludeRule\": $(find /backup -name "*.tar" -exec tar -xOf "{}" ./backup.json \;| jq -sc 'map(select(.protected) | "/backup/\(.slug).tar")')}"
+    FILTER="{\"IncludeRule\": $(find /backup -name "*.tar" -exec tar -xOf "{}" ./backup.json \;| jq -sc 'map(select(.protected) | "\(.slug).tar")')}"
 fi
 
 bashio::log.info "Filter: $FILTER"
