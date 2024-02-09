@@ -12,7 +12,7 @@ RUN /install_rclone.sh "${VERSION}" "${BUILD_ARCH}"
 
 # Add timegaps for pruning backups
 RUN apk add --no-cache python3 py3-pip jq && \
-       pip install --no-cache-dir timegaps==0.1.1 && \
+       pip install --break-system-packages --no-cache-dir timegaps==0.1.1 && \
        apk del py3-pip
 
 ENV XDG_CONFIG_HOME=/data
